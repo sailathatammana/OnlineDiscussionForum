@@ -9,6 +9,7 @@ import AuthPage from "./components/auth/AuthPage";
 import HomePage from "./components/home/HomePage";
 import PostsPage from "./components/posts/PostsPage";
 import ChatPage from "./components/chat/ChatPage";
+import Footer from "./components/layout/Footer"
 import "./App.css";
 
 export default function App() {
@@ -38,6 +39,7 @@ export default function App() {
           </Route>
         </Switch>
       </div>
+      <Footer/>
     </BrowserRouter>
   );
 
