@@ -22,6 +22,7 @@ public class SkeletonApplication {
 					.addMapping("/**")
 					.allowedOrigins("*")
 					.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+
 			}
 		};
 	}
