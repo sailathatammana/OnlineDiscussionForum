@@ -3,8 +3,8 @@ import Auth from "../../services/Auth";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
-// import './Login.css';
-// import logo from '../../assets/logo.png';
+import './AuthPage.css';
+ import logo from '../../assets/logo.jpg';
 
 function AuthPage() {
 
@@ -30,8 +30,8 @@ function AuthPage() {
                 <div className="row mt-4">
                     <div className="col-md-6" >
                         <div className="branding" >
-                            {/* <img className="brandLogo" src= {logo} alt="logo" /> */}
-                            <h1 className="brandName" >SDA starter template</h1>
+                            <img className="brandLogo" src= {logo} alt="logo" />
+                            <h2 className="Info" >Heal2Happy</h2>
                         </div>
                     </div>
 
