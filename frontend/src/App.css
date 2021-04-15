@@ -1,6 +1,6 @@
 body {
   min-height: 100vh;
-  background: linear-gradient(to left, #81c3cf, #165C57);
+  background-color: #165C57 !important;
 }
 
 .App {

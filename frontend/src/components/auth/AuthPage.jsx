@@ -4,7 +4,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 import './AuthPage.css';
- import logo from '../../assets/logo.jpg';
+ import logo from "../../assests/logo.jpg";
 
 function AuthPage() {
 
@@ -31,7 +31,7 @@ function AuthPage() {
                     <div className="col-md-6" >
                         <div className="branding" >
                             <img className="brandLogo" src= {logo} alt="logo" />
-                            <h2 className="Info" >Heal2Happy</h2>
+                            <h5 className="Info" >Get Connected and share the experience!!!</h5>
                         </div>
                     </div>
 

@@ -6,10 +6,6 @@
   margin-top: 100px;
   padding-top: 64px;
 }
-.card{
-    margin-top: 40px;
-
-}
 
 /* .brandLogo {
     width: 50%;
@@ -19,8 +15,5 @@
 @media (min-width: 750px) {
   .brandLogo {
     margin-top: 50px;
-  }
-  .card{
-
   }
 }

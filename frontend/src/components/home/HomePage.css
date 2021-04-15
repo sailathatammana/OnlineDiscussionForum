@@ -1,5 +1,8 @@
-.body{
-    margin:auto;
-    padding-right: -100px;
-
+.homeImage {
+    padding: 0;
+    width: 30%;
+}
+.home-body {
+    padding-top: 10px;
+    color: white !important;
 }

@@ -10,14 +10,14 @@ export default function HomePage() {
       <div className="container">
         <div className="row mt-4">
           <div className="col-md-6">
-            <div className="card-body">
-              <h4 className="card-title">SDA stater Page</h4>
-              <p>
-                This starter template is based on Spring, PostgreSQL, React,
+          <div className="card-body">
+                <h4 className="card-title">SDA Starter Page</h4>
+                <div className="home-body">
+                    <p>This starter template is based on Spring, PostgreSQL, React,
                 React router and Axios. Check the following links for
-                documentation and guides.
-              </p>
-            </div>
+                documentation and guides.</p>
+                </div>
+                </div>
           </div>
 
           <div className="col-md-6">
