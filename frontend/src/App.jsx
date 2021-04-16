@@ -1,47 +1,66 @@
-// NPM Packages
-import React, { useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 
-// Project files
-import Auth from "./services/Auth";
-import Navbar from "./components/layout/Navbar";
+import './App.css';
+
+import Auth from './services/Auth';
+import UserApi from './api/UserApi';
+
+// Import pages
 import AuthPage from "./components/auth/AuthPage";
-import HomePage from "./components/home/HomePage";
+import HomePage from './components/home/HomePage';
 import PostsPage from "./components/posts/PostsPage";
-import ChatPage from "./components/chat/ChatPage";
-import Footer from "./components/layout/Footer"
-import "./App.css";
+import ChatPage from './components/chat/ChatPage';
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
-export default function App() {
-  // State
-  const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
+function App() {
+    const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
+    Auth.bindLoggedInStateSetter(setLoggedIn);
 
-  // Constants
-  Auth.bindLoggedInStateSetter(setLoggedIn);
+    const [user, setUser] = useState({});
+    const userMail = Auth.getUserMail();
 
-  // Components
-  const loggedInRouter = (
-    <BrowserRouter>
-      <Navbar onLogout={() => Auth.logout()} />
+    // Store user informations when logged: can acces user mail, name, Id
+    useEffect(() => {
+        function getUserByMail() {
+            UserApi.getUserByMail(userMail)
+                .then((res) => {
+                    setUser(res.data)
+                })
+        }
 
-      <div className="container mt-5">
-        <Switch>
-          <Route path="/posts">
-            <PostsPage />
-          </Route>
+        userMail !== null && getUserByMail();
+    }, [userMail])
 
-          <Route path="/chat">
-            <ChatPage />
-          </Route>
+    const loggedInRouter = (
+        <Router>
+            <Navbar onLogout={() => Auth.logout()} />
 
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </div>
-      <Footer/>
-    </BrowserRouter>
-  );
+            <div className="container mt-5">
+                <Switch>
+                    <Route path="/posts">
+                        <PostsPage user={user} />
+                    </Route>
+                    
+                    <Route path="/chat">
+                        <ChatPage user={user} />
+                    </Route>
 
-  return loggedIn ? loggedInRouter : <AuthPage />;
+                    <Route path="/">
+                        <HomePage user={user} />
+                    </Route>
+                </Switch>
+            </div>
+            <Footer />
+        </Router>
+    );
+
+    return (loggedIn ? loggedInRouter : <AuthPage />);
 }
+
+export default App;

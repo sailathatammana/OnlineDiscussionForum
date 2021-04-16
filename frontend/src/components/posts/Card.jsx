@@ -26,7 +26,8 @@ function Post(props) {
         <div className="text-right">
         <div>
           {props.post.user.email !== props.user.email ? (
-              <span><button
+              <span>
+                {/* <button
                 type="button"
                 className="btn btn-light"
                 onClick={() => props.likePost(props.post)}
@@ -40,7 +41,7 @@ function Post(props) {
                 onClick={() => props.disLikePost(props.post)}
               >
                 <i class="fas fa-thumbs-down"></i><sup>{props.post.disLikes}</sup>
-              </button>
+              </button> */}
             </span>
           ) : null}
           {props.post.user.email === props.user.email ? (

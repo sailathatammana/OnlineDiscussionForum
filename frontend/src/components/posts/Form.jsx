@@ -15,8 +15,8 @@ function PostForm(props){
         const newPost = {
             postTitle: title, 
             postBody: body,
-            likes: 0,
-            disLikes: 0,
+            // likes: 0,
+            // disLikes: 0,
             user: props.user
         }; 
         
