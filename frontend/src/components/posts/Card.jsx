@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// import CommentsPage from "../comments/CommentsPage";
+import CommentsPage from "../comments/CommentList";
 import "./Card.css";
 
 // A single post, here you can create your post as you want it to be
@@ -90,21 +90,12 @@ function Post(props) {
               </button>
             </div>
             <div className="modal-body">
-              {/* <CommentsPage
+              <CommentsPage
                 key={props.post.id}
                 post={props.post}
                 user={props.user}
-              /> */}
+              />
             </div>
-            {/* <div class="modal-footer bg-secondary">
-              <button
-                type="button"
-                className="btn btn-light"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-            </div> */}
           </div>
         </div>
       </div>

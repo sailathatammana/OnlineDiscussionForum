@@ -22,6 +22,7 @@ function AuthPage() {
         if (!registerSuccess) {
             alert("Couldn't register check credentials and try again");
         }
+        console.log("REGISTER");
     }
 
     return (

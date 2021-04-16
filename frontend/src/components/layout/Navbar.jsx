@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./Navbar.css";
+
 export default function Navbar({ onLogout }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <Link className="navbar-brand" to="/">
-        SDA starter
+        Heal2Happy
       </Link>
       <button
         className="navbar-toggler"
