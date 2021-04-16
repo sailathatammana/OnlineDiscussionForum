@@ -4,11 +4,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // Project files
 import Auth from "./services/Auth";
-import Navbar from "./components/Navbar";
-import AuthPage from "./pages/auth/AuthPage";
-import HomePage from "./pages/home/HomePage";
-import PostsPage from "./pages/posts/PostsPage";
-import ChatPage from "./pages/chat/ChatPage";
+import Navbar from "./components/layout/Navbar";
+import AuthPage from "./components/auth/AuthPage";
+import HomePage from "./components/home/HomePage";
+import PostsPage from "./components/posts/PostsPage";
+import ChatPage from "./components/chat/ChatPage";
+import Footer from "./components/layout/Footer"
 import "./App.css";
 
 export default function App() {
@@ -38,6 +39,7 @@ export default function App() {
           </Route>
         </Switch>
       </div>
+      <Footer/>
     </BrowserRouter>
   );
 
