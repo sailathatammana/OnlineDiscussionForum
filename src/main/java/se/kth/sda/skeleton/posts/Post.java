@@ -13,6 +13,16 @@ public class Post {
     private String title;
     private String body;
 
+    @OneToMany(mappedBy = "commentForPost", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Post() {
     }
@@ -45,5 +55,6 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
+    
 
 }

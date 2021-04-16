@@ -3,6 +3,7 @@ import React from "react";
 
 import Grid2 from "./Grid2";
 import Grid1 from "./Grid1";
+import image from "../../assests/image.jpg";
 
 export default function HomePage() {
   return (
@@ -11,11 +12,16 @@ export default function HomePage() {
         <div className="row mt-4">
           <div className="col-md-6">
           <div className="card-body">
-                <h4 className="card-title">SDA Starter Page</h4>
+                <h4 className="card-title">About the Forum</h4>
                 <div className="home-body">
-                    <p>This starter template is based on Spring, PostgreSQL, React,
-                React router and Axios. Check the following links for
-                documentation and guides.</p>
+                    <p>The Forum aims to promote the most effective strategies 
+                      to build trust and confidence in COVID-19 vaccines.
+                      As COVID-19 immunisation continues across the world, 
+                      many people are still unclear as to what vaccines mean for transmission.
+                      This forum allows our members to get in touch and share their views and experiences of 
+                      on COVID-19 vaccination. </p>
+                    
+                      <img className="brandLogo" src= {image} alt="articleImage" />
                 </div>
                 </div>
           </div>
