@@ -4,7 +4,7 @@ import PostsApi from '../../api/PostsApi';
 // Components
 import PostForm from "./Form";
 import Post from './Card';
-// import "./PostsPage.css";
+import "./PostsPage.css";
 
 function PostsPage({user}) {
     
@@ -90,7 +90,7 @@ function PostsPage({user}) {
 
     return (
         <div className="PostPage">
-            {/* <div className="container d-flex justify-content-around mb-4">
+            <div className="container d-flex justify-content-around mb-4">
                 <button 
                     className="btn btn-sm btn-info"
                     onClick={handleClickCreate} aria-pressed="true"
@@ -103,8 +103,8 @@ function PostsPage({user}) {
                     className="btn btn-sm btn-info"
                     onClick={handleClickMyPosts} aria-pressed="true" 
                 >My Posts</button>
-            </div> */}
-            <div class="container d-flex justify-content-around mb-4 btn-group btn-group-toggle" data-toggle="buttons">
+            </div>
+            {/* <div class="container d-flex justify-content-around mb-4 btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="option1" autocomplete="off" checked onClick={handleClickCreate}/> Create Post
                 </label>
@@ -114,7 +114,7 @@ function PostsPage({user}) {
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="option3" autocomplete="off" onClick={handleClickMyPosts}/> My Posts
                 </label>
-            </div>
+            </div> */}
 
 
 
