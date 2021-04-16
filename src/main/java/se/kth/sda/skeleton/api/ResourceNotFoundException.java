@@ -1,4 +1,4 @@
-package se.kth.sda.skeleton.posts;
+package se.kth.sda.skeleton.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -3,6 +3,7 @@ package se.kth.sda.skeleton.comments;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import se.kth.sda.skeleton.posts.Post;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,14 +16,12 @@ public class Comment{
     private Long id;
 
     @Column(nullable = false)
-    @NotNull
     private String body;
 
     @ManyToOne()
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
-    @NotNull
     private Post commentForPost;
 
     public Post getCommentForPost() {
