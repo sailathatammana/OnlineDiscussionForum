@@ -2,9 +2,7 @@ package se.kth.sda.skeleton.posts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
+import se.kth.sda.skeleton.api.ResourceNotFoundException;
 
 /*
     @TODO Implement service methods.
