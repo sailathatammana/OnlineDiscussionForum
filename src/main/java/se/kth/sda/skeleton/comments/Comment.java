@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import se.kth.sda.skeleton.posts.Post;
+import se.kth.sda.skeleton.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,13 +17,16 @@ public class Comment{
     private Long id;
 
     @Column(nullable = false)
-    private String body;
+    private String commentBody;
 
     @ManyToOne()
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
     private Post commentForPost;
+
+    @ManyToOne
+    private User user;
 
     public Post getCommentForPost() {
         return commentForPost;
@@ -43,11 +47,19 @@ public class Comment{
         this.id = id;
     }
 
-    public String getBody() {
-        return body;
+    public String getcommentBody() {
+        return commentBody;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setcommentBody(String commentBody) {
+        this.commentBody = commentBody;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
