@@ -23,36 +23,30 @@ public class CommentController {
         this.postRepository=postRepository;
     }
 
-    @PutMapping("/comment/{id}")
-    public ResponseEntity<Comment> updateComment(@PathVariable Long id, @Validated({Comment.PutValidationGroup.class})
+    @GetMapping("/posts/{postsId}/answers")
+    public ResponseEntity<List<Comment>> listAllComments(@PathVariable Long postId){
+        return ResponseEntity.ok(commentRepository.findByPostId(postId));
+    }
+
+    @PostMapping("/posts/{postId}/comments")
+    public ResponseEntity<Comment> createCommentOnArticle(@PathVariable Long postId, @Valid @RequestBody Comment comment) {
+        Post post = (Post) postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+        comment.setPost(post);
+        return ResponseEntity.ok(commentRepository.save(comment));
+    }
+
+    @PutMapping("/posts/{postId}/comments{commentsId}")
+    public ResponseEntity<Comment> updateComment(@PathVariable Long questionId, @Validated({Comment.PutValidationGroup.class})
     @RequestBody Comment updatedComment) {
-        Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        Comment comment = commentRepository.findById(questionId).orElseThrow(ResourceNotFoundException::new);
         updatedComment.setId(comment.getId());
         updatedComment.setPost(comment.getPost());
         return ResponseEntity.ok(commentRepository.save(updatedComment));
     }
 
-    @GetMapping(value = "/comments", params = {"authorName"})
-    public ResponseEntity<List<Comment>> listCommentsByAuthorName(@RequestParam String authorName){
-        return ResponseEntity.ok(commentRepository.findByAuthorName(authorName));
-    }
-
-    @PostMapping("/posts/{id}/comments")
-    public ResponseEntity<Comment> createCommentOnArticle(@PathVariable Long id, @Valid @RequestBody Comment comment) {
-        Post post = (Post) postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        comment.setPost(post);
-        return ResponseEntity.ok(commentRepository.save(comment));
-    }
-
-    @GetMapping("/posts/{id}/comments")
-    public ResponseEntity<List<Comment>> listAllComments(@PathVariable String id){
-        return ResponseEntity.ok(commentRepository.findAll());
-    }
-
-
-    @DeleteMapping("/comments/{id}")
-    public ResponseEntity<Comment> deleteComment(@PathVariable Long id) {
-        Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    @DeleteMapping("/posts/{postId}/comments/{commentId}")
+    public ResponseEntity<Comment> deleteComment(@PathVariable Long questionId) {
+        Comment comment = commentRepository.findById(questionId).orElseThrow(ResourceNotFoundException::new);
         commentRepository.delete(comment);
         return ResponseEntity.ok(comment);
     }

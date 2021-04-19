@@ -2,7 +2,6 @@ package se.kth.sda.skeleton.posts;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import se.kth.sda.skeleton.AuditModel.AuditModel;
-import se.kth.sda.skeleton.Topic.Topic;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,7 +14,12 @@ import java.util.Set;
 public class Post extends AuditModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "post_generator")
+    @SequenceGenerator(
+            name = "post_generator",
+            sequenceName = "post_sequence",
+            initialValue =3000
+    )
     private Long id;
 
     @NotBlank
@@ -25,15 +29,6 @@ public class Post extends AuditModel {
     @Column(columnDefinition = "text")
     private String body;
 
-    public Post() {
-    }
-
-   @ManyToMany(mappedBy = "posts")
-    Set<Topic> topics = new HashSet<>();
-
-    public Post(String body) {
-        this.body = body;
-    }
 
     public Long getId() {
         return id;
@@ -59,11 +54,4 @@ public class Post extends AuditModel {
         this.body = body;
     }
 
-    public Set<Topic> getTopics() {
-        return topics;
-    }
-
-    public void setTopics(Set<Topic> topics) {
-        this.topics = topics;
-    }
 }

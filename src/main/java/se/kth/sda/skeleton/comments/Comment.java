@@ -24,11 +24,15 @@ public class Comment extends AuditModel {
    };
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "comment_generator")
+    @SequenceGenerator(
+            name = "comment_generator",
+            sequenceName = "comment_sequence",
+            initialValue = 1000
+    )
     public Long id;
 
-    @NotBlank
-    @Column(nullable = false)
+    @Column(columnDefinition = "text")
     private String comment;
 
     @NotBlank
