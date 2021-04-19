@@ -7,7 +7,7 @@ function CommentForm(props) {
 
     function createComment() {
         if (body === "") { return;}
-        const newComment = { 
+        const newComment = {
             commentBody: body,
             user: props.user,
             post: props.post
@@ -20,23 +20,23 @@ function CommentForm(props) {
     }
 
     return (
-      <div className="card mt-3 text-white">
-        <div className="card-title bg-secondary text-white m-0 p-1">
-          Write your comment here
-        </div>
-        <div className="card-body">
+        <div className="card mt-3 text-white">
+            <div className="card-title bg-secondary text-white m-0 p-1">
+                Write your comment here
+            </div>
+            <div className="card-body">
           <textarea
-            className="form-control"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
+              className="form-control"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
           />
+            </div>
+            <div className="text-right">
+                <button className="btn btn-sm btn-light" onClick={createComment}>
+                    <i class="fas fa-share-square"></i>
+                </button>
+            </div>
         </div>
-        <div className="text-right">
-          <button className="btn btn-sm btn-light" onClick={createComment}>
-            <i class="fas fa-share-square"></i>
-          </button>
-        </div>
-      </div>
     );
 }
 

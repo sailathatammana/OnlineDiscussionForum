@@ -4,7 +4,7 @@ import CommentApi from "../../api/CommentApi";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
-function CommentsList ({post,user}) {
+function CommentList ({post,user}) {
 
     const [ comments, setComments] = useState([]);
 
@@ -30,13 +30,13 @@ function CommentsList ({post,user}) {
                 getAllComments(); // to refresh the list immediately
             })
     }
-    
+
     return(
         <div>
             <CommentForm post={post} getAllComments={getAllComments} user={user}/>
             <div>
                 { comments.length === 0 ? "No comments yet" :
-                    comments.map((comment) => 
+                    comments.map((comment) =>
                         <Comment key={comment.id} comment={comment} user={user} deleteComment={deleteComment}/>
                     )
                 }
@@ -45,4 +45,4 @@ function CommentsList ({post,user}) {
     );
 }
 
-export default CommentsList;
+export default CommentList;
