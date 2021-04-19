@@ -1,7 +1,6 @@
 package se.kth.sda.skeleton.posts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import se.kth.sda.skeleton.Topic.Topic;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,5 +10,5 @@ import java.util.Optional;
  */
 
 public interface PostRepository extends JpaRepository<Post,Long> {
-   List<Post> findByTopics(Topic topic); //optional
+   List<Post> findByPostID(Post post);
 }
