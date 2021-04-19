@@ -7,7 +7,7 @@ import Post from './Card';
 import "./PostsPage.css";
 
 function PostsPage({user}) {
-    
+
     const [ posts, setPosts ] = useState([]) // Will contain all posts
     const [ newPostComponentOn, setNewPostComponentOn ] = useState(false);
     const [ allPostsOn, setAllPostsOn ] = useState(true);
@@ -48,7 +48,7 @@ function PostsPage({user}) {
         }
     }, [])
 
-    
+
 
     // Delete post is at this level because if we delete the post directly inside itself, it will generate issues
     function deletePost(postId) {
@@ -58,14 +58,14 @@ function PostsPage({user}) {
             })
     }
 
-    function likePost(post){
+    /* function likePost(post){
         const newPost = {
             id: post.id,
-            postTitle: post.postTitle, 
+            postTitle: post.postTitle,
             postBody: post.postBody,
             likes: post.likes + 1,
             disLikes: post.disLikes,
-            user: post.user    
+            user: post.user
         }
 
         PostsApi.updatePost(newPost)
@@ -76,35 +76,35 @@ function PostsPage({user}) {
     function disLikePost(post){
         const newPost = {
             id: post.id,
-            postTitle: post.postTitle, 
+            postTitle: post.postTitle,
             postBody: post.postBody,
             likes: post.likes,
             disLikes: post.disLikes + 1,
-            user: post.user    
+            user: post.user
         }
         PostsApi.updatePost(newPost)
             .then(() => {
                 getAllPosts();
             })
-    }
+    } */
 
     return (
         <div className="PostPage">
-            <div className="container d-flex justify-content-around mb-4">
-                <button 
+             <div className="container d-flex justify-content-around mb-4">
+                <button
                     className="btn btn-sm btn-info"
                     onClick={handleClickCreate} aria-pressed="true"
                 >Create Post</button>
-                <button 
+                <button
                     className="btn btn-sm btn-info"
                     onClick={handleClickAll} aria-pressed="true"
                 >All Posts</button>
-                <button 
+                <button
                     className="btn btn-sm btn-info"
-                    onClick={handleClickMyPosts} aria-pressed="true" 
+                    onClick={handleClickMyPosts} aria-pressed="true"
                 >My Posts</button>
             </div>
-            {/* <div class="container d-flex justify-content-around mb-4 btn-group btn-group-toggle" data-toggle="buttons">
+            {/*<div class="container d-flex justify-content-around mb-4 btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="option1" autocomplete="off" checked onClick={handleClickCreate}/> Create Post
                 </label>
@@ -114,7 +114,7 @@ function PostsPage({user}) {
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="option3" autocomplete="off" onClick={handleClickMyPosts}/> My Posts
                 </label>
-            </div> */}
+            </div>*/}
 
 
 
@@ -126,10 +126,11 @@ function PostsPage({user}) {
                     posts
                         .filter((post) => allPostsOn ? true : post.user.id === user.id )
                         .sort((p1, p2) => p1.id > p2.id ? -1 : 1)
-                        .map((post) => 
-                        <Post key={post.id} post={post} user={user} deletePost={deletePost} 
-                        likePost={likePost} disLikePost={disLikePost}/>
-                    )
+                        .map((post) =>
+                            <Post key={post.id} post={post} user={user} deletePost={deletePost}
+                                //   likePost={likePost} disLikePost={disLikePost}
+                                  />
+                        )
                 }
             </div>
             }

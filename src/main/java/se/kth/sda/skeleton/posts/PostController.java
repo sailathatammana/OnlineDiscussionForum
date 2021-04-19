@@ -1,56 +1,49 @@
 package se.kth.sda.skeleton.posts;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.kth.sda.skeleton.api.ResourceNotFoundException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
-/*
-    @TODO create the methods needed to implement the API.
- */
 @RestController
+@RequestMapping("/posts")
 public class PostController {
 
-    PostRepository postRepository;
-    PostService postService;
-
     @Autowired
-    public PostController(PostRepository postRepository, PostService postService) {
-        this.postRepository = postRepository;
-        this.postService = postService;
+    private PostService postService;
+
+    @GetMapping("")
+    public List<Post> getAll(@RequestParam(required = false) Long userId) {
+        if (userId == null) {
+            return postService.getAll();
+        } else {
+            return postService.getAllByUserId(userId);
+        }
     }
 
-    @GetMapping("/posts")
-    public List<Post> listAllPosts() {
-        List<Post> posts = postRepository.findAll( );
-        return posts;
+    //Get a specific post by its id
+    @GetMapping("/{id}")
+    public Post getById(@PathVariable Long id) {
+        return postService.getById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/posts")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        postRepository.save(post);
-        return ResponseEntity.status(HttpStatus.CREATED).body(post);
+    //Create a post
+    @PostMapping("")
+    public Post create(@RequestBody Post newPost) {
+        return postService.create(newPost);
     }
 
-    @GetMapping("/posts/{id}")
-    public ResponseEntity<Post> getPost(@PathVariable Long id){
-        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        return ResponseEntity.ok(post);
+    //Create a task
+    @PutMapping("")
+    public Post update(@RequestBody Post newPost) {
+        return postService.update(newPost);
     }
 
-    @PutMapping("/posts/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long id , @RequestBody Post updatedPost){
-        Post post = postService.updatePost(id, updatedPost);
-        return ResponseEntity.ok(post);
-    }
-
-    @DeleteMapping("posts/{id}")
-    public ResponseEntity<Post> deletePost(@PathVariable Long id){
-        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        postRepository.delete(post);
-        return ResponseEntity.ok(post);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        postService.delete(id);
     }
 }

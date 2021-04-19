@@ -1,7 +1,12 @@
 package se.kth.sda.skeleton.posts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import se.kth.sda.skeleton.comments.Comment;
 
+import java.util.List;
 
-public interface PostRepository extends JpaRepository <Post, Long> {
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
+    List<Post> findAllByUserId(Long userId);
 }

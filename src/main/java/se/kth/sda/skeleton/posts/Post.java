@@ -4,48 +4,44 @@ import se.kth.sda.skeleton.comments.Comment;
 import se.kth.sda.skeleton.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-// @TODO add Hibernate annotations
 @Entity
-public class Post {
 
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String postTitle;
+    @Column(columnDefinition = "TEXT")
     private String postBody;
 
-    @OneToMany(mappedBy = "commentForPost", cascade = CascadeType.ALL)
-    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     @ManyToOne
     private User user;
 
-    public List<Comment> getComments() {
-        return comments;
+    public User getUser() {
+        return user;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Post(Long id, String postTitle, String postBody, User user) {
+        this.id = id;
+        this.postTitle = postTitle;
+        this.postBody = postBody;
+        this.user = user;
     }
 
     public Post() {
     }
 
-    public Post(String postTitle,String postBody) {
-        this.postTitle = postTitle;
-        this.postBody = postBody;
-    }
-
-    public String getpostTitle() {
-        return postTitle;
-    }
-
-    public void setpostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
 
     public Long getId() {
         return id;
@@ -55,20 +51,19 @@ public class Post {
         this.id = id;
     }
 
-    public String getpostBody() {
+    public String getPostTitle() {
+        return postTitle;
+    }
+
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
+    }
+
+    public String getPostBody() {
         return postBody;
     }
 
-    public void setpostBody(String postBody) {
+    public void setPostBody(String postBody) {
         this.postBody = postBody;
     }
-    
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
 }

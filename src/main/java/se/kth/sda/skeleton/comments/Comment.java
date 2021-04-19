@@ -1,40 +1,49 @@
 package se.kth.sda.skeleton.comments;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import se.kth.sda.skeleton.posts.Post;
 import se.kth.sda.skeleton.user.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
-public class Comment{
 
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String commentBody;
 
-    @ManyToOne()
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
-    @JoinColumn(nullable = false)
-    private Post commentForPost;
+    @ManyToOne
+    private Post post;
 
     @ManyToOne
     private User user;
 
-    public Post getCommentForPost() {
-        return commentForPost;
+    public Comment(Long id, String commentBody,Post post,User user) {
+        this.id = id;
+        this.commentBody = commentBody;
+        this.post = post;
+        this.user = user;
     }
 
-    public void setCommentForPost(Post commentForPost) {
-        this.commentForPost = commentForPost;
+    public Post getPost() {
+        return post;
     }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 
     public Comment() {
     }
@@ -47,19 +56,13 @@ public class Comment{
         this.id = id;
     }
 
-    public String getcommentBody() {
+
+    public String getCommentBody() {
         return commentBody;
     }
 
-    public void setcommentBody(String commentBody) {
+    public void setCommentBody(String commentBody) {
         this.commentBody = commentBody;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
+

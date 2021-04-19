@@ -3,7 +3,7 @@ import PostsApi from '../../api/PostsApi';
 import './Form.css';
 
 // Form to create a new Post
-function PostForm(props){
+function Form(props){
 
     // Can add using the same way a title or anything else if we want
     const [body, setBody] = useState("");
@@ -13,34 +13,34 @@ function PostForm(props){
         if (body === "") { return;} // We don't want to send an empty post
 
         const newPost = {
-            postTitle: title, 
+            postTitle: title,
             postBody: body,
             // likes: 0,
             // disLikes: 0,
             user: props.user
-        }; 
-        
+        };
+
         PostsApi.createPost(newPost)
             .then(() => {
                 props.getAllPosts(); // to refresh the list immediately
                 setBody("");  // Clear the Form
                 setTitle("");
             })
-    }    
+    }
 
     return (
         <div className="container col-sm-12 col-md-10 col-lg-8">
             {/* <p className="card-title">Create a new Post</p> */}
             <div className="form-group">
                 <input className="form-control"
-                    placeholder="Title"
-                    value={title}
-                    onChange={event => setTitle(event.target.value)}
+                       placeholder="Title"
+                       value={title}
+                       onChange={event => setTitle(event.target.value)}
                 />
                 <textarea className="form-control post-content"
-                    placeholder={`What's on your mind, ${props.user.name}?`}
-                    value={body}
-                    onChange={event => setBody(event.target.value)}
+                          placeholder={`What's on your mind, ${props.user.name}?`}
+                          value={body}
+                          onChange={event => setBody(event.target.value)}
                 />
             </div>
             <div className="form-group">
@@ -50,4 +50,4 @@ function PostForm(props){
     );
 }
 
-export default PostForm;
+export default Form;

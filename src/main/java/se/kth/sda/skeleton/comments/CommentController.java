@@ -2,61 +2,65 @@ package se.kth.sda.skeleton.comments;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.kth.sda.skeleton.api.ResourceNotFoundException;
+import org.springframework.web.server.ResponseStatusException;
 import se.kth.sda.skeleton.posts.Post;
-import se.kth.sda.skeleton.posts.PostRepository;
 
 import java.util.List;
 
-
 @RestController
+@RequestMapping("/comments")
 public class CommentController {
 
-    CommentRepository commentRepository;
-    PostRepository postRepository;
-
     @Autowired
-    public CommentController(CommentRepository commentRepository, PostRepository postRepository) {
-        this.commentRepository = commentRepository;
-        this.postRepository = postRepository;
+    private CommentService commentService;
+
+    @GetMapping("/postid")
+    public List<Comment> getAllPostId(@RequestParam(required = false) Long postId) {
+        if (postId == null) {
+            return commentService.getAll();
+        } else {
+            return commentService.getAllByPostId(postId);
+        }
     }
 
-    @GetMapping("/posts/{postId}/comments")
-    public ResponseEntity<Comment> getComment(@PathVariable Long postId){
-        Comment comment = commentRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
-        return ResponseEntity.ok(comment);
+
+    @GetMapping("/userid")
+    public List<Comment> getAllByUserId(@RequestParam(required = false) Long userId) {
+        if (userId == null) {
+            return commentService.getAll();
+        } else {
+            return commentService.getAllByUserId(userId);
+        }
+    }
+    @GetMapping("")
+    public List<Comment> getAll() {
+        return commentService.getAll();
     }
 
-    @PostMapping("/posts/{postId}/comments")
-    public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment) {
-        Post post = postRepository
-                .findById(postId)
-                .orElseThrow(ResourceNotFoundException::new);
-        comment.setCommentForPost(post);
-        commentRepository.save(comment);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(comment);
+
+    //Get a specific post by its id
+    @GetMapping("/{id}")
+    public Comment getById(@PathVariable Long id) {
+        return commentService.getById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/comments/{id}")
-    public ResponseEntity<Comment> updateComment(@PathVariable Long id, @RequestBody Comment updatedComment) {
-        Comment comment = commentRepository
-                .findById(id)
-                .orElseThrow(ResourceNotFoundException::new);
-        updatedComment.setId(id);
-        commentRepository.save(updatedComment);
-        return ResponseEntity.ok(updatedComment);
+    //Create a post
+    @PostMapping("")
+    public Comment create(@RequestBody Comment newComment) {
+        return commentService.create(newComment);
     }
 
-    @DeleteMapping("/comments/{id}")
-    public ResponseEntity<Comment> deleteComment(@PathVariable Long id){
-        Comment comment = commentRepository
-                .findById(id)
-                .orElseThrow(ResourceNotFoundException::new);
-        commentRepository.delete(comment);
-        return ResponseEntity.ok(comment);
+    //Create a task
+    @PutMapping("")
+    public Comment update(@RequestBody Comment newComment) {
+        return commentService.update(newComment);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        commentService.delete(id);
+    }
+
 }
