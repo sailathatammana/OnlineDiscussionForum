@@ -1,8 +1,12 @@
-.homeImage {
-    padding: 0;
-    width: 30%;
-}
 .home-body {
-    padding-top: 10px;
-    color: white !important;
+    color: black !important;
+    text-align: justify;
 }
+.brandLogo {
+    width: 240px;
+    margin-top: 0px;
+  }
+
+  .card-title{
+
+  }

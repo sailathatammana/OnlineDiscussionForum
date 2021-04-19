@@ -4,6 +4,9 @@ import React from "react";
 import Grid2 from "./Grid2";
 import Grid1 from "./Grid1";
 import image from "../../assests/image.jpg";
+import image1 from "../../assests/image1.jpg";
+
+import "./HomePage.css";
 
 export default function HomePage() {
   return (
@@ -19,9 +22,9 @@ export default function HomePage() {
                       As COVID-19 immunisation continues across the world, 
                       many people are still unclear as to what vaccines mean for transmission.
                       This forum allows our members to get in touch and share their views and experiences of 
-                      on COVID-19 vaccination. </p>
-                    
+                      on COVID-19 vaccination. </p>                   
                       <img className="brandLogo" src= {image} alt="articleImage" />
+                      <img className="brandLogo" src= {image1} alt="articleImage1" />
                 </div>
                 </div>
           </div>
